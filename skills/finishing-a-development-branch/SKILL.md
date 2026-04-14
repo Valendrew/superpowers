@@ -194,6 +194,3 @@ git worktree remove <worktree-path>
 
 **Called by:**
 - **subagent-driven-development** (Step 7) - After all tasks complete
-
-**Pairs with:**
-- **using-git-worktrees** - Cleans up worktree created by that skill

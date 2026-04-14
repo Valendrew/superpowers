@@ -84,8 +84,8 @@ BRANCH=$(git branch --show-current)
 - `GIT_DIR != GIT_COMMON` → already in a linked worktree (skip creation)
 - `BRANCH` empty → detached HEAD (cannot branch/push/PR from sandbox)
 
-See `using-git-worktrees` Step 0 and `finishing-a-development-branch`
-Step 1 for how each skill uses these signals.
+Use these signals before creating new worktrees, and see
+`finishing-a-development-branch` Step 1 for the branch-finishing flow.
 
 ## Codex App Finishing
 
