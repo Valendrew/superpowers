@@ -5,7 +5,7 @@ You are reviewing code changes for production readiness.
 **Your task:**
 1. Review {WHAT_WAS_IMPLEMENTED}
 2. Compare against {PLAN_OR_REQUIREMENTS}
-3. Check code quality, architecture, testing
+3. Check code quality, architecture, and verification relative to the request
 4. Categorize issues by severity
 5. Assess production readiness
 
@@ -42,11 +42,12 @@ git diff {BASE_SHA}..{HEAD_SHA}
 - Performance implications?
 - Security concerns?
 
-**Testing:**
-- Tests actually test logic (not mocks)?
-- Edge cases covered?
-- Integration tests where needed?
-- All tests passing?
+**Verification / Testing:**
+- Did the human or plan explicitly ask for tests or test coverage?
+- If tests were requested or added, do they actually test logic (not mocks)?
+- If tests were requested or added, are important edge cases covered?
+- If tests were requested or added, are the relevant tests passing?
+- If no tests were requested, is there still a credible verification story for this task?
 
 **Requirements:**
 - All plan requirements met?
@@ -71,7 +72,7 @@ git diff {BASE_SHA}..{HEAD_SHA}
 [Bugs, security issues, data loss risks, broken functionality]
 
 #### Important (Should Fix)
-[Architecture problems, missing features, poor error handling, test gaps]
+[Architecture problems, missing features, poor error handling, verification gaps relative to requirements]
 
 #### Minor (Nice to Have)
 [Code style, optimization opportunities, documentation improvements]
@@ -112,7 +113,7 @@ git diff {BASE_SHA}..{HEAD_SHA}
 ```
 ### Strengths
 - Clean database schema with proper migrations (db.ts:15-42)
-- Comprehensive test coverage (18 tests, all edge cases)
+- Verification matches the stated requirements and catches the risky paths
 - Good error handling with fallbacks (summarizer.ts:85-92)
 
 ### Issues
@@ -142,5 +143,5 @@ git diff {BASE_SHA}..{HEAD_SHA}
 
 **Ready to merge: With fixes**
 
-**Reasoning:** Core implementation is solid with good architecture and tests. Important issues (help text, date validation) are easily fixed and don't affect core functionality.
+**Reasoning:** Core implementation is solid, verification is appropriate for the requested scope, and the important issues (help text, date validation) are easily fixed without changing the overall design.
 ```

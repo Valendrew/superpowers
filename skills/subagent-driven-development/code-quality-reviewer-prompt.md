@@ -2,7 +2,7 @@
 
 Use this template when dispatching a code quality reviewer subagent.
 
-**Purpose:** Verify implementation is well-built (clean, tested, maintainable)
+**Purpose:** Verify implementation is well-built (clean, appropriately verified, maintainable)
 
 **Only dispatch after spec compliance review passes.**
 
@@ -19,7 +19,7 @@ Task tool (superpowers:code-reviewer):
 
 **In addition to standard code quality concerns, the reviewer should check:**
 - Does each file have one clear responsibility with a well-defined interface?
-- Are units decomposed so they can be understood and tested independently?
+- Are units decomposed so they can be understood and verified independently?
 - Is the implementation following the file structure from the plan?
 - Did this implementation create new files that are already large, or significantly grow existing files? (Don't flag pre-existing file sizes — focus on what this change contributed.)
 

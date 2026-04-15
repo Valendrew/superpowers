@@ -1,13 +1,13 @@
 ---
 name: test-driven-development
-description: Use when implementing any feature or bugfix, before writing implementation code
+description: Use when the human explicitly wants TDD or a strict test-first workflow before implementation code is written
 ---
 
 # Test-Driven Development (TDD)
 
 ## Overview
 
-Write the test first. Watch it fail. Write minimal code to pass.
+Use this skill only when the human explicitly wants TDD or a strict test-first workflow. Once chosen, write the test first, watch it fail, and write minimal code to pass.
 
 **Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
 
@@ -15,20 +15,20 @@ Write the test first. Watch it fail. Write minimal code to pass.
 
 ## When to Use
 
-**Always:**
-- New features
-- Bug fixes
-- Refactoring
-- Behavior changes
+**Use this skill when the human explicitly asks for:**
+- TDD
+- Test-first development
+- Strict automated test coverage before implementation
 
-**Exceptions (ask your human partner):**
-- Throwaway prototypes
-- Generated code
-- Configuration files
+**Do not treat this as the default workflow for every task.**
+If the human wants prototypes, research code, or a lighter-weight verification path, follow that request instead of forcing TDD.
+If the human wants tests but did not ask for a strict test-first workflow, do not automatically escalate that into TDD.
 
-Thinking "skip TDD just this once"? Stop. That's rationalization.
+Once you have chosen TDD, thinking "skip TDD just this once"? Stop. That's rationalization.
 
 ## The Iron Law
+
+Once this skill is in play:
 
 ```
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
@@ -36,7 +36,7 @@ NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 
 Write code before the test? Delete it. Start over.
 
-**No exceptions:**
+**No exceptions inside a TDD workflow:**
 - Don't keep it as "reference"
 - Don't "adapt" it while writing tests
 - Don't look at it
@@ -337,7 +337,7 @@ Before marking work complete:
 - [ ] Tests use real code (mocks only if unavoidable)
 - [ ] Edge cases and errors covered
 
-Can't check all boxes? You skipped TDD. Start over.
+Can't check all boxes? You skipped TDD. Start over or stop claiming this was TDD.
 
 ## When Stuck
 
@@ -350,9 +350,7 @@ Can't check all boxes? You skipped TDD. Start over.
 
 ## Debugging Integration
 
-Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.
-
-Never fix bugs without a test.
+If you're using TDD for a bug fix, write a failing test that reproduces it. Follow the TDD cycle so the test proves the fix and prevents regression.
 
 ## Testing Anti-Patterns
 
@@ -368,4 +366,4 @@ Production code → test exists and failed first
 Otherwise → not TDD
 ```
 
-No exceptions without your human partner's permission.
+No exceptions once your human partner has asked for TDD.

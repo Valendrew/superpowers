@@ -7,6 +7,8 @@ description: Use when completing tasks, implementing major features, or before m
 
 Dispatch superpowers:code-reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
+Testing is conditional here. If the human asked for tests or the change includes tests, the reviewer should examine them seriously. If not, the reviewer should focus on whether the implementation and its verification match the stated requirements.
+
 **Core principle:** Review early, review often.
 
 ## When to Request Review
@@ -64,7 +66,7 @@ HEAD_SHA=$(git rev-parse HEAD)
   DESCRIPTION: Added verifyIndex() and repairIndex() with 4 issue types
 
 [Subagent returns]:
-  Strengths: Clean architecture, real tests
+  Strengths: Clean architecture, verification matches the plan
   Issues:
     Important: Missing progress indicators
     Minor: Magic number (100) for reporting interval
@@ -95,7 +97,7 @@ You: [Fix progress indicators]
 
 **If reviewer wrong:**
 - Push back with technical reasoning
-- Show code/tests that prove it works
+- Show code, requirements, and any verification evidence that prove it works
 - Request clarification
 
 See template at: requesting-code-review/code-reviewer.md
