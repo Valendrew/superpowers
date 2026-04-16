@@ -38,7 +38,7 @@ digraph process {
         "Dispatch implementer subagent (./implementer-prompt.md)" [shape=box];
         "Implementer subagent asks questions?" [shape=diamond];
         "Answer questions, provide context" [shape=box];
-        "Implementer subagent implements, verifies, commits, self-reviews" [shape=box];
+        "Implementer subagent implements, verifies, self-reviews, reports back" [shape=box];
         "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
         "Spec reviewer subagent confirms code matches spec?" [shape=diamond];
         "Implementer subagent fixes spec gaps" [shape=box];
@@ -57,8 +57,8 @@ digraph process {
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
     "Implementer subagent asks questions?" -> "Answer questions, provide context" [label="yes"];
     "Answer questions, provide context" -> "Dispatch implementer subagent (./implementer-prompt.md)";
-    "Implementer subagent asks questions?" -> "Implementer subagent implements, verifies, commits, self-reviews" [label="no"];
-    "Implementer subagent implements, verifies, commits, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
+    "Implementer subagent asks questions?" -> "Implementer subagent implements, verifies, self-reviews, reports back" [label="no"];
+    "Implementer subagent implements, verifies, self-reviews, reports back" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
     "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "Spec reviewer subagent confirms code matches spec?";
     "Spec reviewer subagent confirms code matches spec?" -> "Implementer subagent fixes spec gaps" [label="no"];
     "Implementer subagent fixes spec gaps" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [label="re-review"];
@@ -136,12 +136,12 @@ Implementer: "Got it. Implementing now..."
   - Implemented install-hook command
   - Added verification matching the task requirements
   - Self-review: Found I missed --force flag, added it
-  - Committed
+  - Reported back with files changed and verification evidence
 
 [Dispatch spec compliance reviewer]
 Spec reviewer: ✅ Spec compliant - all requirements met, nothing extra
 
-[Get git SHAs, dispatch code quality reviewer]
+[Use implementer's changed files to define review scope, dispatch code quality reviewer]
 Code reviewer: Strengths: Verification fits the task, implementation is clean. Issues: None. Approved.
 
 [Mark Task 1 complete]
@@ -156,7 +156,7 @@ Implementer:
   - Added verify/repair modes
   - Verified the new behavior and reported the relevant evidence
   - Self-review: All good
-  - Committed
+  - Reported back with files changed and verification evidence
 
 [Dispatch spec compliance reviewer]
 Spec reviewer: ❌ Issues:
@@ -229,6 +229,7 @@ Done!
 - Accept "close enough" on spec compliance (spec reviewer found issues = not done)
 - Skip review loops (reviewer found issues = implementer fixes = review again)
 - Let implementer self-review replace actual review (both are needed)
+- Let implementer commit autonomously without explicit controller or human approval
 - **Start code quality review before spec compliance is ✅** (wrong order)
 - Move to next task while either review has open issues
 

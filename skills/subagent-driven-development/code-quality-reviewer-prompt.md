@@ -12,8 +12,8 @@ Task tool (superpowers:code-reviewer):
 
   WHAT_WAS_IMPLEMENTED: [from implementer's report]
   PLAN_OR_REQUIREMENTS: Task N from [plan-file]
-  BASE_SHA: [commit before task]
-  HEAD_SHA: [current commit]
+  REVIEW_SCOPE: [commit range or changed files for this task]
+  DIFF_COMMANDS: [git diff commands reviewer should run for that scope]
   DESCRIPTION: [task summary]
 ```
 

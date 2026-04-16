@@ -17,14 +17,12 @@ You are reviewing code changes for production readiness.
 
 {PLAN_REFERENCE}
 
-## Git Range to Review
+## Review Scope
 
-**Base:** {BASE_SHA}
-**Head:** {HEAD_SHA}
+{REVIEW_SCOPE}
 
 ```bash
-git diff --stat {BASE_SHA}..{HEAD_SHA}
-git diff {BASE_SHA}..{HEAD_SHA}
+{DIFF_COMMANDS}
 ```
 
 ## Review Checklist

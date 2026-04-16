@@ -35,7 +35,7 @@ When a skill says to dispatch a named agent type:
 1. Find the agent's prompt file (e.g., `agents/code-reviewer.md` or the skill's
    local prompt template like `code-quality-reviewer-prompt.md`)
 2. Read the prompt content
-3. Fill any template placeholders (`{BASE_SHA}`, `{WHAT_WAS_IMPLEMENTED}`, etc.)
+3. Fill any template placeholders (`{REVIEW_SCOPE}`, `{WHAT_WAS_IMPLEMENTED}`, etc.)
 4. Spawn a `worker` agent with the filled content as the `message`
 
 | Skill instruction | Codex equivalent |
@@ -87,8 +87,8 @@ branch name, follow the detached-HEAD guidance below instead.
 ## Codex App Finishing
 
 When the sandbox blocks branch or push operations because the checkout is in a
-detached HEAD state, the agent commits all work and informs the user to use the
-App's native controls:
+detached HEAD state, the agent leaves changes uncommitted and informs the user
+to use the App's native controls:
 
 - **"Create branch"** — names the branch, then commit/push/PR via App UI
 - **"Hand off to local"** — transfers work to the user's local checkout

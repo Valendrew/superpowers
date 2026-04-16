@@ -32,7 +32,7 @@ Task tool (general-purpose):
     1. Implement exactly what the task specifies
     2. Add the verification the task actually calls for
     3. Verify implementation works
-    4. Commit your work
+    4. Prepare your changes for review without creating commits
     5. Self-review (see below)
     6. Report back
 
@@ -40,6 +40,9 @@ Task tool (general-purpose):
 
     **While you work:** If you encounter something unexpected or unclear, **ask questions**.
     It's always OK to pause and clarify. Don't guess or make assumptions.
+
+    **Version control:** Do not create commits, push, or open PRs unless the controller
+    explicitly instructs you to do so after review.
 
     ## Code Organization
 

@@ -25,10 +25,14 @@ Testing is conditional here. If the human asked for tests or the change includes
 
 ## How to Request
 
-**1. Get git SHAs:**
+**1. Define review scope:**
 ```bash
+# If the work is committed:
 BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
 HEAD_SHA=$(git rev-parse HEAD)
+
+# If the work is still uncommitted:
+CHANGED_FILES="path/to/file1 path/to/file2"
 ```
 
 **2. Dispatch code-reviewer subagent:**
@@ -38,8 +42,8 @@ Use Task tool with superpowers:code-reviewer type, fill template at `code-review
 **Placeholders:**
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built
 - `{PLAN_OR_REQUIREMENTS}` - What it should do
-- `{BASE_SHA}` - Starting commit
-- `{HEAD_SHA}` - Ending commit
+- `{REVIEW_SCOPE}` - Commit range or changed files being reviewed
+- `{DIFF_COMMANDS}` - Exact `git diff` commands for the reviewer to run
 - `{DESCRIPTION}` - Brief summary
 
 **3. Act on feedback:**
@@ -55,14 +59,13 @@ Use Task tool with superpowers:code-reviewer type, fill template at `code-review
 
 You: Let me request code review before proceeding.
 
-BASE_SHA=$(git log --oneline | grep "Task 1" | head -1 | awk '{print $1}')
-HEAD_SHA=$(git rev-parse HEAD)
-
 [Dispatch superpowers:code-reviewer subagent]
   WHAT_WAS_IMPLEMENTED: Verification and repair functions for conversation index
   PLAN_OR_REQUIREMENTS: Task 2 from docs/superpowers/plans/deployment-plan.md
-  BASE_SHA: a7981ec
-  HEAD_SHA: 3df7661
+  REVIEW_SCOPE: Changes in indexer.ts repair.ts indexer.test.ts
+  DIFF_COMMANDS:
+    git diff --stat -- indexer.ts repair.ts indexer.test.ts
+    git diff -- indexer.ts repair.ts indexer.test.ts
   DESCRIPTION: Added verifyIndex() and repairIndex() with 4 issue types
 
 [Subagent returns]:
