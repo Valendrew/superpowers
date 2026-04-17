@@ -289,8 +289,5 @@ These techniques are part of systematic debugging and available in this director
 
 ## Real-World Impact
 
-From debugging sessions:
-- Systematic approach: 15-30 minutes to fix
-- Random fixes approach: 2-3 hours of thrashing
-- First-time fix rate: 95% vs 40%
-- New bugs introduced: Near zero vs common
+Systematic approach: 15–30 min to fix; first-time fix rate ~95%; near-zero new bugs introduced.
+Random-fix approach: 2–3 hours of thrashing; ~40% first-time fix rate; new bugs common.

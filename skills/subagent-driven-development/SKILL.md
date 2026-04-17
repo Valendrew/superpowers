@@ -117,104 +117,38 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 
 ```
 You: I'm using Subagent-Driven Development to execute this plan.
-
-[Read plan file once: docs/superpowers/plans/feature-plan.md]
-[Extract all 5 tasks with full text and context]
-[Create TodoWrite with all tasks]
+[Read plan once, extract all tasks + context, create TodoWrite]
 
 Task 1: Hook installation script
-
-[Get Task 1 text and context (already extracted)]
-[Dispatch implementation subagent with full task text + context]
-
-Implementer: "Before I begin - should the hook be installed at user or system level?"
-
+[Dispatch implementer with full task text + context]
+Implementer: "Before I begin — user or system level?"
 You: "User level (~/.config/superpowers/hooks/)"
+Implementer: Implemented, verified, self-reviewed (caught missing --force, added it), reported files + evidence.
 
-Implementer: "Got it. Implementing now..."
-[Later] Implementer:
-  - Implemented install-hook command
-  - Added verification matching the task requirements
-  - Self-review: Found I missed --force flag, added it
-  - Reported back with files changed and verification evidence
-
-[Dispatch spec compliance reviewer]
-Spec reviewer: ✅ Spec compliant - all requirements met, nothing extra
-
-[Use implementer's changed files to define review scope, dispatch code quality reviewer]
-Code reviewer: Strengths: Verification fits the task, implementation is clean. Issues: None. Approved.
-
+[Dispatch spec reviewer] → ✅ compliant
+[Dispatch code quality reviewer, scoped to implementer's changed files] → Approved
 [Mark Task 1 complete]
 
 Task 2: Recovery modes
+[Dispatch implementer] → No questions, implements, verifies, reports.
 
-[Get Task 2 text and context (already extracted)]
-[Dispatch implementation subagent with full task text + context]
-
-Implementer: [No questions, proceeds]
-Implementer:
-  - Added verify/repair modes
-  - Verified the new behavior and reported the relevant evidence
-  - Self-review: All good
-  - Reported back with files changed and verification evidence
-
-[Dispatch spec compliance reviewer]
-Spec reviewer: ❌ Issues:
-  - Missing: Progress reporting (spec says "report every 100 items")
-  - Extra: Added --json flag (not requested)
-
-[Implementer fixes issues]
-Implementer: Removed --json flag, added progress reporting
-
-[Spec reviewer reviews again]
-Spec reviewer: ✅ Spec compliant now
-
-[Dispatch code quality reviewer]
-Code reviewer: Strengths: Solid. Issues (Important): Magic number (100)
-
-[Implementer fixes]
-Implementer: Extracted PROGRESS_INTERVAL constant
-
-[Code reviewer reviews again]
-Code reviewer: ✅ Approved
-
+[Dispatch spec reviewer] → ❌ Missing: progress reporting every 100 items. Extra: --json flag (not requested).
+[Implementer fixes: removes --json, adds progress reporting]
+[Spec reviewer re-reviews] → ✅ compliant
+[Dispatch code quality reviewer] → Issues (Important): magic number 100
+[Implementer extracts PROGRESS_INTERVAL]
+[Code reviewer re-reviews] → ✅ approved
 [Mark Task 2 complete]
 
 ...
 
-[After all tasks]
-[Dispatch final code-reviewer]
-Final reviewer: All requirements met, ready to merge
-
-Done!
+[After all tasks: dispatch final code reviewer over entire implementation]
+Final reviewer: All requirements met, ready to merge.
 ```
 
 ## Advantages
 
-**vs. Manual execution:**
-- Subagents follow the plan's requested verification approach
-- Fresh context per task (no confusion)
-- Parallel-safe (subagents don't interfere)
-- Subagent can ask questions (before AND during work)
-
-**Efficiency gains:**
-- No file reading overhead (controller provides full text)
-- Controller curates exactly what context is needed
-- Subagent gets complete information upfront
-- Questions surfaced before work begins (not after)
-
-**Quality gates:**
-- Self-review catches issues before handoff
-- Two-stage review: spec compliance, then code quality
-- Review loops ensure fixes actually work
-- Spec compliance prevents over/under-building
-- Code quality ensures implementation is well-built
-
-**Cost:**
-- More subagent invocations (implementer + 2 reviewers per task)
-- Controller does more prep work (extracting all tasks upfront)
-- Review loops add iterations
-- But catches issues early (cheaper than debugging later)
+Controller delegates isolated context per task, curates exactly what each subagent needs, and preserves its own context for coordination. Two-stage review (spec compliance then code quality) with re-review loops catches over/under-building and quality issues early — cheaper than debugging later. Cost trade-off: more subagent invocations and upfront extraction work, offset by early issue detection.
 
 ## Red Flags
 

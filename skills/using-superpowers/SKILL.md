@@ -27,7 +27,7 @@ If CLAUDE.md, GEMINI.md, or AGENTS.md says "don't use TDD" and a skill says "alw
 
 ## How to Access Skills
 
-**In Claude Code:** Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.
+**In Claude Code:** Use the `Skill` tool. Invoking a skill loads its content — follow it directly. Never use Read on skill files.
 
 **In other environments:** Check your platform's documentation for how skills are loaded.
 
@@ -103,10 +103,7 @@ When multiple skills could apply, use this order:
 ## Skill Types
 
 **Rigid** (TDD, debugging): Follow exactly. Don't adapt away discipline.
-
 **Flexible** (patterns): Adapt principles to context.
-
-The skill itself tells you which.
 
 ## User Instructions
 

@@ -5,9 +5,7 @@ description: "You MUST use this before any creative work - creating features, bu
 
 # Brainstorming Ideas Into Designs
 
-Help turn ideas into fully formed designs and specs through natural collaborative dialogue.
-
-Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.
+Turn ideas into fully formed designs and specs through collaborative dialogue. Start from project context, ask questions one at a time, then present the design and get approval.
 
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.
@@ -61,30 +59,19 @@ digraph brainstorming {
 
 ## The Process
 
-**Understanding the idea:**
+**Scope check first:** If the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this before asking detailed questions. Help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
 
-- Check out the current project state first (files, docs, recent commits)
-- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
-- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
-- For appropriately-scoped projects, ask questions one at a time to refine the idea
-- Prefer multiple choice questions when possible, but open-ended is fine too
-- Only one question per message - if a topic needs more exploration, break it into multiple questions
-- Focus on understanding: purpose, constraints, success criteria
+**Asking questions:**
+- One question per message; prefer multiple choice when possible, open-ended is fine otherwise
+- Focus on purpose, constraints, success criteria
 
-**Exploring approaches:**
-
-- Propose 2-3 different approaches with trade-offs
-- Present options conversationally with your recommendation and reasoning
-- Lead with your recommended option and explain why
+**Exploring approaches:** Propose 2-3 options with trade-offs. Lead with your recommendation and explain why.
 
 **Presenting the design:**
-
-- Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
 - Ask after each section whether it looks right so far
-- Cover: architecture, components, data flow, error handling, and verification
+- Cover: architecture, components, data flow, error handling, verification
 - Only turn verification into a concrete automated testing/TDD plan when the human explicitly asks for tests or the project already depends on them
-- Be ready to go back and clarify if something doesn't make sense
 
 **Design for isolation and clarity:**
 
@@ -131,9 +118,7 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 ## Key Principles
 
-- **One question at a time** - Don't overwhelm with multiple questions
-- **Multiple choice preferred** - Easier to answer than open-ended when possible
-- **YAGNI ruthlessly** - Remove unnecessary features from all designs
-- **Explore alternatives** - Always propose 2-3 approaches before settling
-- **Incremental validation** - Present design, get approval before moving on
-- **Be flexible** - Go back and clarify when something doesn't make sense
+- **YAGNI ruthlessly** — remove unnecessary features from all designs
+- **One question at a time, multiple choice preferred** — don't overwhelm
+- **Incremental validation** — present design, get approval before moving on
+- **Be flexible** — go back and clarify when something doesn't make sense
