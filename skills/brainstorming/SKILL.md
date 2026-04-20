@@ -17,8 +17,9 @@ Before proposing any design that adds or changes scripts, manifests, tests, gene
    - Do not split the same operational guidance across README, scripts, tests, and docs unless each has a clearly different purpose.
 
 2. **Minimum runtime contract**
-   - Any manifest, CSV, JSON schema, or interface must default to the minimum fields required by the current runtime path.
+   - Any manifest, CSV, JSON schema, interface, or CLI surface must default to the minimum fields and arguments required by the current runtime path.
    - Extra traceability or convenience fields must be explicitly justified and approved.
+   - When the real contract is one concrete file or directory location, prefer a direct path over split abstractions like base-path-plus-version unless both layers are independently meaningful and user-visible.
 
 3. **Documentation boundaries**
    - READMEs may describe workflows and relationships between tools.
@@ -100,6 +101,7 @@ digraph brainstorming {
 - For work involving scripts, manifests, tests, or generated artifacts, include a short section that states:
   - source of truth for workflow documentation
   - minimum runtime contract
+  - whether a direct path or layered path abstraction is justified
   - what belongs in README vs script/test docstrings
   - whether naming is generic or task-specific
 

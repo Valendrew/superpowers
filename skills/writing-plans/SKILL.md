@@ -118,7 +118,8 @@ After writing the complete plan, look at the spec with fresh eyes and check the 
 
 **4. Contract/doc ownership check:** If the work adds or changes scripts, manifests, tests, or generated artifacts:
 - Is there exactly one workflow-level documentation owner?
-- Did the plan keep schemas to the minimum runtime contract unless extra fields were explicitly approved?
+- Did the plan keep schemas and CLI surfaces to the minimum runtime contract unless extra fields were explicitly approved?
+- Did the plan prefer a direct file/directory path when that is the real contract, instead of introducing layered path abstractions without clear independent meaning?
 - Do script/test updates document only themselves rather than the whole workflow?
 - Is naming generic when reuse is intended?
 - Are temporary workarounds labeled with a short TODO for the preferred long-term fix?
