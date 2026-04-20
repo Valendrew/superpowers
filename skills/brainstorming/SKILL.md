@@ -9,6 +9,30 @@ Turn ideas into fully formed designs and specs through collaborative dialogue. S
 
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.
+
+Before proposing any design that adds or changes scripts, manifests, tests, generated artifacts, or documentation, you MUST explicitly lock these decisions with the user:
+
+1. **Single source of truth**
+   - Decide which file owns the workflow-level documentation.
+   - Do not split the same operational guidance across README, scripts, tests, and docs unless each has a clearly different purpose.
+
+2. **Minimum runtime contract**
+   - Any manifest, CSV, JSON schema, or interface must default to the minimum fields required by the current runtime path.
+   - Extra traceability or convenience fields must be explicitly justified and approved.
+
+3. **Documentation boundaries**
+   - READMEs may describe workflows and relationships between tools.
+   - Scripts and tests must document only their own purpose, inputs, outputs, and local assumptions.
+   - Scripts and tests must not be treated as cross-referenced workflow documentation unless explicitly requested.
+
+4. **Naming scope**
+   - If the mechanism is intended to be reusable across technologies, products, or repos, prefer generic names.
+   - If it is intentionally narrow, use specific names.
+   - This must be decided before implementation.
+
+5. **Temporary workaround policy**
+   - If a workaround is less readable than the ideal design, call it out explicitly before using it.
+   - Add a short TODO describing the preferred long-term fix in simple terms.
 </HARD-GATE>
 
 ## Anti-Pattern: "This Is Too Simple To Need A Design"
@@ -21,12 +45,13 @@ You MUST create a task for each of these items and complete them in order:
 
 1. **Explore project context** — check files, docs, recent commits
 2. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
-3. **Propose 2-3 approaches** — with trade-offs and your recommendation
-4. **Present design** — in sections scaled to their complexity, get user approval after each section
-5. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
-6. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
-7. **User reviews written spec** — ask user to review the spec file before proceeding
-8. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+3. **Lock contract and documentation ownership** — source of truth, minimum runtime schema, naming scope, workaround policy
+4. **Propose 2-3 approaches** — with trade-offs and your recommendation
+5. **Present design** — in sections scaled to their complexity, get user approval after each section
+6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
+7. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+8. **User reviews written spec** — ask user to review the spec file before proceeding
+9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
@@ -72,6 +97,11 @@ digraph brainstorming {
 - Ask after each section whether it looks right so far
 - Cover: architecture, components, data flow, error handling, verification
 - Only turn verification into a concrete automated testing/TDD plan when the human explicitly asks for tests or the project already depends on them
+- For work involving scripts, manifests, tests, or generated artifacts, include a short section that states:
+  - source of truth for workflow documentation
+  - minimum runtime contract
+  - what belongs in README vs script/test docstrings
+  - whether naming is generic or task-specific
 
 **Design for isolation and clarity:**
 

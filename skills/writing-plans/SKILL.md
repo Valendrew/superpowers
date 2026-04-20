@@ -116,6 +116,13 @@ After writing the complete plan, look at the spec with fresh eyes and check the 
 
 **3. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
 
+**4. Contract/doc ownership check:** If the work adds or changes scripts, manifests, tests, or generated artifacts:
+- Is there exactly one workflow-level documentation owner?
+- Did the plan keep schemas to the minimum runtime contract unless extra fields were explicitly approved?
+- Do script/test updates document only themselves rather than the whole workflow?
+- Is naming generic when reuse is intended?
+- Are temporary workarounds labeled with a short TODO for the preferred long-term fix?
+
 If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
 
 ## Execution Handoff
