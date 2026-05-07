@@ -1,0 +1,39 @@
+{
+  "name": "superpowers",
+  "version": "0.1.0",
+  "description": "A suite of composable software development workflow skills for Codex.",
+  "author": {
+    "name": "Andrea Valente",
+    "email": "andrea.valente99@gmail.com",
+    "url": "https://github.com/Valendrew"
+  },
+  "homepage": "https://github.com/Valendrew/superpowers",
+  "repository": "https://github.com/Valendrew/superpowers",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "skills",
+    "workflow",
+    "development"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Superpowers",
+    "shortDescription": "Workflow skills for disciplined software development with Codex.",
+    "longDescription": "Superpowers provides a suite of composable Codex skills for brainstorming, planning, debugging, test-driven development, code review, verification, and finishing development branches.",
+    "developerName": "Andrea Valente",
+    "category": "Productivity",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/Valendrew/superpowers",
+    "privacyPolicyURL": "[TODO: privacy-policy-url]",
+    "termsOfServiceURL": "[TODO: terms-of-service-url]",
+    "defaultPrompt": [
+      "Use Superpowers for this task.",
+      "Brainstorm this change before coding.",
+      "Verify this work before completion."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

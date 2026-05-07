@@ -4,6 +4,16 @@ Superpowers is a software development workflow for coding agents. It is organize
 
 Each skill is self-contained in `skills/<skill-name>/SKILL.md`. This README is only the suite overview; the skill files are the source of truth for operational instructions.
 
+This repository is Andrea Valente's Codex plugin fork of the original Superpowers project by Jesse Vincent.
+
+## Install With Codex
+
+```bash
+codex plugin marketplace add Valendrew/superpowers
+```
+
+Restart Codex after installation so skill discovery can load the Superpowers skills.
+
 ## Workflow
 
 The core workflow is:
