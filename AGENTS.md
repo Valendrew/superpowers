@@ -6,8 +6,8 @@ This repository contains the Superpowers skill suite for coding agents. Treat it
 
 ## Project Structure & Module Organization
 
-- `skills/<skill-name>/SKILL.md` is the source of truth for each skill.
-- Supporting files live beside the skill that uses them, such as `skills/systematic-debugging/root-cause-tracing.md` or `skills/subagent-driven-development/implementer-prompt.md`.
+- `plugins/superpowers/skills/<skill-name>/SKILL.md` is the source of truth for each skill.
+- Supporting files live beside the skill that uses them, such as `plugins/superpowers/skills/systematic-debugging/root-cause-tracing.md` or `plugins/superpowers/skills/subagent-driven-development/implementer-prompt.md`.
 - `README.md` is only the suite overview. Do not duplicate operational skill instructions there.
 - `docs/` contains platform or supporting documentation, currently including Codex installation notes and prompt optimization material.
 
@@ -30,7 +30,7 @@ Keep documentation single-purpose. If guidance controls how a skill operates, pl
 Do not add stale references to removed skills. Before documenting a skill, confirm it exists with:
 
 ```bash
-find skills -maxdepth 2 -name SKILL.md -print | sort
+find plugins/superpowers/skills -maxdepth 2 -name SKILL.md -print | sort
 ```
 
 ## Agent-Specific Instructions
@@ -41,5 +41,5 @@ Before reporting completion, verify the touched Markdown files with:
 
 ```bash
 git diff --check -- <paths>
-rg -n "<removed-or-renamed-skill>" README.md AGENTS.md skills || true
+rg -n "<removed-or-renamed-skill>" README.md AGENTS.md plugins/superpowers/skills || true
 ```
