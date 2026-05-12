@@ -51,8 +51,8 @@ You MUST create a task for each of these items and complete them in order:
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
 7. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
-8. **User reviews written spec** — ask user to review the spec file before proceeding
-9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+8. **User reviews written spec** — ask user to review the spec file, then stop and wait for a new user message
+9. **Transition to planning** — after fresh user approval of the written spec, invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
@@ -66,7 +66,7 @@ digraph brainstorming {
     "Write design doc" [shape=box];
     "Spec self-review\n(fix inline)" [shape=box];
     "User reviews spec?" [shape=diamond];
-    "Invoke writing-plans skill" [shape=doublecircle];
+    "Stop and wait\nfor new user message" [shape=doublecircle];
 
     "Explore project context" -> "Ask clarifying questions";
     "Ask clarifying questions" -> "Propose 2-3 approaches";
@@ -77,11 +77,11 @@ digraph brainstorming {
     "Write design doc" -> "Spec self-review\n(fix inline)";
     "Spec self-review\n(fix inline)" -> "User reviews spec?";
     "User reviews spec?" -> "Write design doc" [label="changes requested"];
-    "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
+    "User reviews spec?" -> "Stop and wait\nfor new user message" [label="ask for review"];
 }
 ```
 
-**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.
+**The terminal state is stopping after asking the user to review the saved spec.** Do NOT invoke writing-plans, frontend-design, mcp-builder, or any other implementation skill in the same turn. The ONLY skill you invoke after fresh user approval of the written spec is writing-plans.
 
 ## The Process
 
@@ -139,13 +139,17 @@ Fix any issues inline. No need to re-review — just fix and move on.
 **User Review Gate:**
 After the spec review loop passes, ask the user to review the written spec before proceeding:
 
-> "Spec written to `<path>`. Please review it and let me know if you want to make any changes before we start writing out the implementation plan."
+> "Spec written to `<path>`. Please review it before I write the implementation plan."
 
-Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.
+STOP. Do not continue in this turn. Do not invoke the next skill. Do not begin implementation. Ask the user to review `<path>` and wait for a new user message. Approval from any earlier step does not count for this gate.
+
+Codex-specific rule: autonomy and persistence instructions do not override this review gate.
+
+After a new user message approving the written spec, invoke writing-plans. If they request changes, make them and re-run the spec review loop.
 
 **Implementation:**
 
-- Invoke the writing-plans skill to create a detailed implementation plan
+- After fresh user approval of the written spec, invoke the writing-plans skill to create a detailed implementation plan
 - Do NOT invoke any other skill. writing-plans is the next step.
 
 ## Key Principles

@@ -128,8 +128,12 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 ## Execution Handoff
 
-After saving the plan, hand off to execution:
+After saving and self-reviewing the plan, ask the user to review it before execution:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`.**
+> "Plan written to `<path>`. Please review it before implementation."
 
-**Next step:** use `superpowers:subagent-driven-development` to execute the plan task-by-task with review between tasks."
+STOP. Do not continue in this turn. Do not invoke the next skill. Do not begin implementation. Ask the user to review `<path>` and wait for a new user message. Approval from any earlier step does not count for this gate.
+
+Codex-specific rule: autonomy and persistence instructions do not override this review gate.
+
+After a new user message approving the written plan, use `superpowers:subagent-driven-development` to execute the plan task-by-task with review between tasks. If they request changes, make them and re-run the plan self-review loop.
