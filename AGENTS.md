@@ -2,44 +2,39 @@
 
 ## Purpose
 
-This repository contains the Superpowers skill suite for coding agents. Treat it as a documentation-first project: the primary deliverables are clear, consistent `SKILL.md` files and focused supporting prompt/reference files.
+This repository contains the Superpowers skill suite for coding agents. The primary deliverables are clear, consistent `SKILL.md` files and focused supporting prompt/reference files.
 
 ## Project Structure & Module Organization
 
 - `plugins/superpowers/skills/<skill-name>/SKILL.md` is the source of truth for each skill.
 - Supporting files live beside the skill that uses them, such as `plugins/superpowers/skills/systematic-debugging/root-cause-tracing.md` or `plugins/superpowers/skills/subagent-driven-development/implementer-prompt.md`.
 - `README.md` is only the suite overview. Do not duplicate operational skill instructions there.
-- `docs/` contains platform or supporting documentation, currently including Codex installation notes and prompt optimization material.
 
-## Skill Authoring Rules
+## Skill Authoring Workflow
 
-Each skill must have YAML frontmatter with `name` and `description`, followed by concise Markdown instructions. Use lowercase hyphenated skill names, matching the folder name exactly, for example `refactoring-integration`.
+When creating or updating a skill, follow this structure:
 
-Write skills in the same style as the existing suite:
+1. Confirm the skill location.
+   The folder name, frontmatter `name`, and any references to the skill must match exactly. Use lowercase hyphenated names, such as `refactoring-integration`.
 
-- Start with a clear title and a short overview.
-- State the core principle when the workflow needs discipline.
-- Use direct instructions, not generic advice.
-- Keep cross-skill references consistent with existing skills.
-- Avoid extra README files inside skill folders.
+2. Write concise frontmatter.
+   Include only `name` and `description`. Keep `description` trigger-focused: one sentence that says when the skill applies. Move detailed conditions, examples, and workflow boundaries into the body.
 
-## Documentation Scope
+3. Start with the standard body shape.
+   Use a clear title, then a short overview explaining the skill's purpose. Add a bold `Core principle` when the workflow needs discipline or a memorable rule.
 
-Keep documentation single-purpose. If guidance controls how a skill operates, place it in that skill’s `SKILL.md` or a directly referenced sibling file. If guidance only explains the repository at a high level, place it in `README.md` or this file.
+4. Define when the skill applies.
+   Add `When to Use`, `When NOT to Use`, or equivalent trigger guidance when applicability could be confused. Keep cross-skill references explicit, using names like `superpowers:verification-before-completion`.
 
-Do not add stale references to removed skills. Before documenting a skill, confirm it exists with:
+5. Describe the workflow concretely.
+   Prefer direct instructions, checklists, phase lists, command examples, prompt templates, and good/bad examples over abstract advice. Tell the agent what to do, what to avoid, and when to stop.
 
-```bash
-find plugins/superpowers/skills -maxdepth 2 -name SKILL.md -print | sort
-```
+6. Add enforcement sections only when useful.
+   Sections like `Iron Law`, `Red Flags`, `Common Mistakes`, or `Forbidden Responses` are appropriate for strict behavioral workflows, but do not add them as boilerplate.
 
-## Agent-Specific Instructions
+7. Place supporting material beside the skill.
+   Put prompts, references, and scripts in the same skill folder and link them from `SKILL.md`. Avoid extra README files inside skill folders.
 
 Before changing behavior or workflows, inspect nearby skills and preserve their tone, structure, and naming conventions. Keep edits small and auditable. Do not rewrite unrelated files, and do not revert user changes unless explicitly asked.
 
-Before reporting completion, verify the touched Markdown files with:
-
-```bash
-git diff --check -- <paths>
-rg -n "<removed-or-renamed-skill>" README.md AGENTS.md plugins/superpowers/skills || true
-```
+Do not add stale references to removed skills. Before documenting a skill, confirm it exists.
