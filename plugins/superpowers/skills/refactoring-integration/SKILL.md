@@ -1,6 +1,6 @@
 ---
 name: refactoring-integration
-description: Use for high-risk refactoring, branch alignment, feature migration, backend integration, or architecture migration where behavior must be preserved, history must stay clean, and changes need staged planning, semantic commits, and validation gates. Trigger when users ask to align branches, port features across divergent code, modernize structure, integrate a backend, refactor safely, or preserve project-specific functionality while adopting another branch's architecture.
+description: Use when high-risk refactors, migrations, branch alignments, or backend integrations must preserve behavior and stay auditable
 ---
 
 # Refactoring Integration
@@ -15,7 +15,7 @@ Use this skill for refactors, branch alignments, backend integrations, migration
 
 Do not start by editing code. First identify the contract, the authoritative implementation, and the smallest sequence of reviewable steps that keeps the system working.
 
-## When To Use
+## When to Use
 
 Use this skill when the user asks to:
 
