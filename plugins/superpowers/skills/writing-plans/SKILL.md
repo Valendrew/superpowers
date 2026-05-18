@@ -30,6 +30,12 @@ Before defining tasks, map out which files will be created or modified and what 
 
 This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
 
+## Source Preservation
+
+When a plan tells an implementer to copy, port, transplant, or recreate code from another branch, user-provided snippet, patch, existing function, or reference implementation, treat that source as intentional user/reference-authored code.
+
+The plan must preserve comments, docstrings, annotations, attribution or context notes, formatting-relevant structure, and adjacent helper logic unless the task explicitly changes them. If anything from the source should be removed, rewritten, or intentionally not copied, call that out in the plan so the implementer does not silently discard it.
+
 ## Bite-Sized Task Granularity
 
 **Each step is one action (2-5 minutes):**
