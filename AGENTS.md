@@ -10,7 +10,7 @@ This fork supports Codex only. Do not add compatibility instructions, workflows,
 
 Original project: `obra/superpowers`, branch `upstream/main`.
 
-Latest reviewed upstream commit: `917e5f53b16b115b70a3a355ed5f4993b9f8b73d`.
+Latest reviewed upstream commit: `f2cbfbefebbfef77321e4c9abc9e949826bea9d7`.
 
 When upstream sync checks are performed, compare changes after this commit against this fork's current skill set. Integrate only changes that are relevant to this Codex-only fork, and update this commit hash to the latest reviewed `upstream/main` commit.
 
