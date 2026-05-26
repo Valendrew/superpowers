@@ -7,7 +7,7 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, relevant verification, docs they might need to check, and how to validate the change when validation matters. Give them the whole plan as bite-sized tasks. DRY. YAGNI.
+Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, implementation direction, relevant verification, docs they might need to check, and how to validate the change when validation matters. Give them the whole plan as bite-sized tasks. DRY. YAGNI.
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain.
 
@@ -43,6 +43,14 @@ The plan must preserve comments, docstrings, annotations, attribution or context
 - "Implement the minimal code for this behavior" - step
 - "Run the relevant verification for this change" - step
 
+## Implementation Detail Standard
+
+Each task must be self-contained enough for an isolated implementer and an isolated reviewer to execute and verify it without reading earlier tasks or guessing. Use the smallest precise representation that removes ambiguity: file paths, insertion points, existing symbols or patterns to inspect, function/type signatures, required behavior, constraints, edge cases, non-goals, and exact verification commands.
+
+Use exact code blocks when the code itself is the requirement: public contracts, schemas, migrations, CLI/API surfaces, copied or ported source, tricky logic, compatibility behavior, security-sensitive logic, or cases where prose plus references would leave multiple valid interpretations.
+
+For ordinary implementation, prefer precise signatures, pattern references, behavioral requirements, and verification over full code listings. Pattern references must name the file/symbol to inspect and state the required delta; "similar to Task N" is still forbidden. If a code block is illustrative rather than mandatory, label it `Example shape, not exact code` and state which parts are contractual.
+
 ## Plan Document Header
 
 **Every plan MUST start with this header:**
@@ -73,13 +81,17 @@ The plan must preserve comments, docstrings, annotations, attribution or context
 
 - [ ] **Step 1: Inspect the existing implementation**
 
-```python
-# Confirm the surrounding API and insertion point before editing
-def existing_function(input):
-    ...
-```
+Inspect `exact/path/to/existing.py` around `existing_function()` and confirm the surrounding API and insertion point.
 
 - [ ] **Step 2: Write minimal implementation**
+
+Implementation requirements:
+- Add `function(input: InputType) -> OutputType` in `exact/path/to/file.py`
+- Follow the error-handling pattern from `existing_function()`
+- Preserve input ordering
+- Do not add new configuration or CLI flags
+
+Example shape, not exact code:
 
 ```python
 def function(input):
@@ -104,9 +116,10 @@ Every step must contain the actual content an engineer needs. These are **plan f
 - "TBD", "TODO", "implement later", "fill in details"
 - "Add appropriate error handling" / "add validation" / "handle edge cases"
 - "Verify the above" (without the exact command or manual check)
-- "Similar to Task N" (repeat the code — the engineer may be reading tasks out of order)
-- Steps that describe what to do without showing how (code blocks required for code steps)
-- References to types, functions, or methods not defined in any task
+- "Similar to Task N" (repeat the required local contract, signature, name, or behavior - the engineer may be reading tasks out of order)
+- Steps that leave the implementer or reviewer guessing about API shape, insertion point, behavior, edge cases, constraints, non-goals, or verification
+- Code blocks that look mandatory but are only illustrative; label them `Example shape, not exact code` and state which parts are contractual
+- References to types, functions, or methods not defined in the same task or in the specific files/symbols the task tells the implementer to inspect
 
 ## Remember
 - Use testing when it materially helps, not as a ritual
@@ -120,9 +133,11 @@ After writing the complete plan, look at the spec with fresh eyes and check the 
 
 **2. Placeholder scan:** Search your plan for red flags — any of the patterns from the "No Placeholders" section above. Fix them.
 
-**3. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
+**3. Task-local executability:** Can each task be handed to an isolated implementer and isolated reviewer without earlier tasks? Does it repeat required contracts, signatures, names, behavior, constraints, non-goals, and verification? Do pattern references name the file/symbol and required delta? Are exact code blocks justified, or labeled as illustrative with contractual parts called out?
 
-**4. Contract/doc ownership check:** If the work adds or changes scripts, manifests, tests, or generated artifacts:
+**4. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
+
+**5. Contract/doc ownership check:** If the work adds or changes scripts, manifests, tests, or generated artifacts:
 - Is there exactly one workflow-level documentation owner?
 - Did the plan keep schemas and CLI surfaces to the minimum runtime contract unless extra fields were explicitly approved?
 - Did the plan prefer a direct file/directory path when that is the real contract, instead of introducing layered path abstractions without clear independent meaning?
